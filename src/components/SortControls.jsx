@@ -12,7 +12,7 @@ export const SortControls = ({ sortOrder, onSortChange }) => {
   return (
     <div className="d-flex justify-content-center mb-4">
       <div className="d-flex gap-3 align-items-center">
-        <span className="text-muted">Сортировка:</span>
+        <span className="text-muted">Сортування:</span>
         <button
           type="button"
           className={`btn btn-sm ${sortOrder === 'asc' ? 'btn-primary' : 'btn-outline-primary'}`}
