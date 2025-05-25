@@ -8,6 +8,8 @@ import {
   startAfter,
   getCountFromServer,
   orderBy,
+  getDoc,
+  doc,
 } from "firebase/firestore";
 import { FIREBASE_CONFIG } from "../constants/firebaseConfig";
 import { initializeApp } from "firebase/app";
@@ -135,9 +137,29 @@ const getPostsByCategory = async ({ categoryKey, sortOrder = null }) => {
   }
 };
 
+const getPostById = async (postId) => {
+  try {
+    const postsCollection = collection(db, "posts");
+    const postDoc = await getDoc(doc(postsCollection, postId));
+
+    if (!postDoc.exists()) {
+      throw new Error("Post not found");
+    }
+
+    return {
+      id: postDoc.id,
+      ...postDoc.data(),
+    };
+  } catch (error) {
+    console.error("Error fetching post by id:", error);
+    throw error;
+  }
+};
+
 export const firestoreService = {
   getPostsWithPagination,
   getPostsByCategory,
   getCategories,
   getPostsCount,
+  getPostById,
 };
