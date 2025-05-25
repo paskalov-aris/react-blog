@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import { firestoreService } from "../services/firestoreService";
+import { CategoriesContext } from "../contexts/CategoriesContext";
 
-export const useCategories = () => {
-  const [categories, setCategories] = useState([]);
+export const useFetchCategories = () => {
+  const { setCategories } = useContext(CategoriesContext);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -14,7 +15,5 @@ export const useCategories = () => {
     };
 
     fetchCategories();
-  }, []);
-
-  return { categories };
+  }, [setCategories]);
 };

@@ -3,10 +3,15 @@ import { useBlogPosts } from "../hooks/useBlogPosts";
 import { Container, Row } from "react-bootstrap";
 import { BlogPost } from "../components/BlogPost";
 import { SortControls } from "../components/SortControls";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useContext } from "react";
+import { Categories } from "../components/Categories";
+import { CategoriesContext } from "../contexts/CategoriesContext";
 
 export const PostsByCategory = () => {
   const { categoryKey } = useParams();
+
+  const { categories } = useContext(CategoriesContext);
+
   const [sortOrder, setSortOrder] = useState('');
   const { posts } = useBlogPosts(categoryKey, 1, sortOrder || null);
 
@@ -16,6 +21,7 @@ export const PostsByCategory = () => {
 
   return (
     <Container>
+      <Categories categories={categories} activeCategoryKey={categoryKey} />
       <SortControls sortOrder={sortOrder} onSortChange={handleSortChange} />
 
       <div className="d-flex justify-content-center">

@@ -1,23 +1,23 @@
-import { Card, Col, Container, Pagination, Row } from "react-bootstrap";
+import { Container, Pagination, Row } from "react-bootstrap";
 import { Categories } from "../components/Categories";
 import { SortControls } from "../components/SortControls";
 import { useBlogPosts } from "../hooks/useBlogPosts";
-import { useCategories } from "../hooks/useCategories";
+import { useFetchCategories } from "../hooks/useFetchCategories";
 import { usePostsCount } from "../hooks/usePostsCount";
 import { BlogPost } from "../components/BlogPost";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useContext } from "react";
+import { CategoriesContext } from "../contexts/CategoriesContext";
 
 export const HomePage = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [sortOrder, setSortOrder] = useState('desc');
+  const { categories } = useContext(CategoriesContext);
 
-  const { posts } = useBlogPosts(
-    null,
-    currentPage,
-    sortOrder || null
-  );
-  const { categories } = useCategories();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortOrder, setSortOrder] = useState("desc");
+
   const { totalPages } = usePostsCount();
+  const { posts } = useBlogPosts(null, currentPage, sortOrder || null);
+
+  useFetchCategories();
 
   const handlePageChange = useCallback((pageNumber) => {
     setCurrentPage(pageNumber);
