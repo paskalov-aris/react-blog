@@ -1,17 +1,6 @@
 import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
-const formatDate = (dateString) => {
-  if (!dateString) return "";
-
-  const date = new Date(dateString);
-
-  return date.toLocaleDateString("uk-UA", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-};
+import { formatDate } from "../utils/date";
 
 export const BlogPost = ({ post }) => {
   const pathToPost = `/post/${post.id}`;

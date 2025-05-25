@@ -20,6 +20,7 @@ export const BlogPostPage = () => {
     const newReview = {
       id: reviews?.length ? reviews[reviews.length - 1].id + 1 : 1,
       text: reviewText,
+      createdAt: new Date().toISOString(),
     };
 
     setReviews([...reviews, newReview]);
