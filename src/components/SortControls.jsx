@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const SortControls = ({ sortOrder, onSortChange }) => {
+  const { t } = useTranslation();
+
   const handleAscendingSortButtonClick = () => {
     onSortChange('asc');
   };
@@ -12,7 +15,7 @@ export const SortControls = ({ sortOrder, onSortChange }) => {
   return (
     <div className="d-flex justify-content-center mb-4">
       <div className="d-flex gap-3 align-items-center">
-        <span className="text-muted">Сортування:</span>
+        <span className="text-muted">{t('sorting')}:</span>
         <button
           type="button"
           className={`btn btn-sm ${sortOrder === 'asc' ? 'btn-primary' : 'btn-outline-primary'}`}
@@ -22,7 +25,7 @@ export const SortControls = ({ sortOrder, onSortChange }) => {
             fontWeight: sortOrder === 'asc' ? 'bold' : 'normal'
           }}
         >
-          Дата ↑
+          {t('date_asc')}
         </button>
         <button
           type="button"
@@ -33,7 +36,7 @@ export const SortControls = ({ sortOrder, onSortChange }) => {
             fontWeight: sortOrder === 'desc' ? 'bold' : 'normal'
           }}
         >
-          Дата ↓
+          {t('date_desc')}
         </button>
       </div>
     </div>

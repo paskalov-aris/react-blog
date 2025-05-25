@@ -7,6 +7,7 @@ import { usePostsCount } from "../hooks/usePostsCount";
 import { BlogPost } from "../components/BlogPost";
 import { useCallback, useState, useContext } from "react";
 import { CategoriesContext } from "../contexts/CategoriesContext";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
 export const HomePage = () => {
   const { categories } = useContext(CategoriesContext);
@@ -49,8 +50,8 @@ export const HomePage = () => {
 
   return (
     <Container>
+      <LanguageSwitcher />
       <Categories categories={categories} />
-
       <SortControls sortOrder={sortOrder} onSortChange={handleSortChange} />
 
       <div className="d-flex justify-content-center">
